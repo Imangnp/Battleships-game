@@ -59,6 +59,11 @@ class Board:
             self.grid[guess.row][guess.column] = '$'
             self.ship_counter -= 1
 
+            # Announce the end of the game
+            if self.is_game_finished():
+                return True
+            return False
+
         # if the player's input is missed
         if self.grid[guess.row][guess.column] == '-':
             print(f"{guess.striker} missed This time.")
@@ -67,6 +72,10 @@ class Board:
         return False
 
 
+    def is_game_finished(self) -> bool:
+        if self.ship_counter == 0:
+            return True
+        return False
 
 class Game:
 
@@ -84,7 +93,7 @@ class Game:
         player.print_grid(False)
         # Initializes  opponent's board
         computer.init_board()
-        computer.print_grid(True)
+        computer.print_grid(False)
         # Start the game
         is_player_turn = True
         has_player_won = False
@@ -138,6 +147,13 @@ class Game:
 
             player.print_grid(False)
             computer.print_grid(True)
+
+            if has_player_won:
+                print(f"Game over!\n{player_name} won the game!")
+                exit(0)
+            elif has_computer_won:
+                print(f"Game over!\n\n{OPPONENT_NAME} won the game!")
+                exit(0)
 
 def main():
     game = Game()
