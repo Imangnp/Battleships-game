@@ -25,7 +25,7 @@ class Board:
         self.ship_counter = 0
         
     # Create the boards for player and opponent
-    def print_grid(self):
+    def print_grid(self, mask_ships=True):
         # Print boards with player and opponent lable
         print(f"\n{self.name}'s battlefield:\n")
         print("    0  1  2  3  4")
@@ -34,8 +34,11 @@ class Board:
             print(row, end = " | ")
             for column in range(len(self.grid[row])):
                 current_value = self.grid[row][column]
-                
-                print(current_value, end = "  ")
+                # Masks Computer's ships
+                if current_value == "@" and mask_ships:
+                    print("-", end="  ")
+                else:
+                    print(current_value, end = "  ")
             print("| ")
         print("  +----------------+\n")
 
@@ -80,10 +83,10 @@ class Game:
         computer = Board("Computer")
         # Initializes player's board
         player.init_board()
-        player.print_grid()
+        player.print_grid(False)
         # Initializes  opponent's board
         computer.init_board()
-        computer.print_grid()
+        computer.print_grid(True)
         # Start the game
         is_player_turn = True
         while True:
