@@ -31,9 +31,16 @@ class Board:
             print("| ")
         print("  +----------------+\n")
 
-    # def init_board(self):
+    # Randomly creating coordinates for ships
+    def init_board(self):
+        while self.ship_counter < NUMBER_OF_SHIPS:
+            x = random.randint(0, NUMBER_OF_SHIPS)
+            y = random.randint(0, NUMBER_OF_SHIPS)
+            if self.grid[x][y] != '@':
+                self.grid[x][y] = '@'
+                self.ship_counter += 1
     
-    # def add_guess_to_grid(self, guess: Guess) -> bool:
+    # def add_guess_to_grid(self):
 
     # def valutate_guess(self):
 
@@ -45,11 +52,11 @@ class Game:
         
     def start(self):
         player_board = Board("Player")
-       
+        player_board.init_board()
         player_board.print_grid()
 
         computer_board = Board("Computer")
-       
+        computer_board.init_board()
         computer_board.print_grid()
 
     # def validate_input(self):
