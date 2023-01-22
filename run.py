@@ -8,6 +8,14 @@ player_score = 0
 computer_score = 0
 
 
+# Holds information about a players guess in a row and column and player's name
+class Guess:
+    def __init__(self, row: int, column: int, striker: str):
+        self.row = row
+        self.column = column
+        self.striker = striker
+
+
 class Board:
 
     def __init__(self, name: str):
@@ -58,6 +66,21 @@ class Game:
         computer_board = Board("Computer")
         computer_board.init_board()
         computer_board.print_grid()
+
+        is_player_turn = True
+        has_player_won = False
+        has_computer_won = False
+        while True:
+            if is_player_turn:
+                # Ask player to input Coordinates
+                while True:
+                    row_input = input("Guess a row:\n ")
+                    column_input = input("Guess a column:\n ")
+                    print("=======================")
+
+                    player_guess = Guess(row=row_input,
+                                         column=column_input,
+                                         striker=player_name)
 
     # def validate_input(self):
 
