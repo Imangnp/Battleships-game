@@ -66,21 +66,19 @@ class Board:
             return False
         return False
 
-    def check_if_winner(self):
-        if self.ship_counter == 0:
-            return True
-        return False
 
 
 class Game:
 
     def __init__(self):
-        pass
+        self.guesses = {OPPONENT_NAME: []}
         
     def start(self):
-
-        player = Board("Player")
-        computer = Board("Computer")
+        # Ask the player for a username
+        player_name = input("Please enter your username:\n")
+        self.guesses[player_name] = []
+        player = Board(player_name)
+        computer = Board(OPPONENT_NAME)
         # Initializes player's board
         player.init_board()
         player.print_grid(False)
@@ -89,44 +87,57 @@ class Game:
         computer.print_grid(True)
         # Start the game
         is_player_turn = True
+        has_player_won = False
+        has_computer_won = False
         while True:
             if is_player_turn:
                 # Ask player to input Coordinates
                 while True:
-                    try:
-                        row_input = int(input("Guess a row:\n "))
-                        column_input = int(input("Guess a column:\n "))
-                        print("=======================")
-                        if row_input not in range(BOARD_SIZE) or column_input not in range(BOARD_SIZE):
-                            raise ValueError
+                    row_input = int(input("Guess a row:\n "))
+                    column_input = int(input("Guess a column:\n "))
+                    print("=======================")
+
+                    player_guess = Guess(row=row_input,
+                                         column=column_input,
+                                         striker=player_name)
+                    # Verify if the guess is valid
+                    if player_guess not in self.guesses.get(player_name):
+                        is_player_turn = False
+                        self.guesses.get(player_name).append(player_guess)
+                        # Verify if the guess hit a ship.
+                        has_player_won = computer.add_guess_to_grid(
+                                        guess=player_guess)
                         break
-                    except ValueError:
-                        print("Invalid input. Please enter a number between 0 and 4.")
-                player_guess = Guess(row=row_input,
-                                     column=column_input,
-                                     striker=("Player"))
-                if computer.add_guess_to_grid(player_guess):
-                    has_player_won = True
-                    break
-                is_player_turn = False
-            else:
-                # Computer makes a guess
+                    else:
+                        print("Guess already taken, please take a new guess!")
+                        continue
+
+            # Computer generates random coordinates for its guess
+            # by calling random.randint() method twice.
+            while True:
                 row_input = random.randint(0, BOARD_SIZE - 1)
                 column_input = random.randint(0, BOARD_SIZE - 1)
                 computer_guess = Guess(row=row_input,
                                        column=column_input,
                                        striker=OPPONENT_NAME)
-                if player.add_guess_to_grid(computer_guess):
-                    has_computer_won = True
+                # Verify if the guess is valid
+                if computer_guess not in self.guesses.get(player_name):
+                    is_player_turn = True
+                    # Verify if the guess hit a ship by add guess to the grid.
+                    has_computer_won = player.add_guess_to_grid(
+                                        guess=computer_guess)
+
+                    print(f"\n{player.name}'s Score: ",
+                          NUMBER_OF_SHIPS - computer.ship_counter)
+                    print("Computer's Score: ",
+                          NUMBER_OF_SHIPS - player.ship_counter)
+                    print("=======================\n")
                     break
-                is_player_turn = True
-            player.print_grid()
-            computer.print_grid()
-        if has_player_won:
-            print("Player wins!")
-        elif has_computer_won:
-            print("Computer wins!")
-    
+                else:
+                    continue
+
+            player.print_grid(False)
+            computer.print_grid(True)
 
 def main():
     game = Game()
