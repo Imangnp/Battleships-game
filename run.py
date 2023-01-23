@@ -8,6 +8,21 @@ player_score = 0
 computer_score = 0
 
 
+# Verify if the player's input is valid between 0 and BOARD_SIZE-1
+def take_valid_input(msg):
+    while True:
+        try:
+            str_input = input(msg)
+            if not str_input:
+                raise ValueError("Please enter a valid value")
+            int_input = int(str_input)
+            if int_input < 0 or int_input >= BOARD_SIZE:
+                raise ValueError("Please enter a number between 0 and 4")
+            return int_input
+        except ValueError:
+            print("Please enter a number between 0 and 4")
+
+
 # Holds information about a players guess in a row and column and player's name
 class Guess:
     def __init__(self, row: int, column: int, striker: str):
@@ -102,8 +117,8 @@ class Game:
             if is_player_turn:
                 # Ask player to input Coordinates
                 while True:
-                    row_input = int(input("Guess a row:\n "))
-                    column_input = int(input("Guess a column:\n "))
+                    row_input = take_valid_input("Guess a row:\n ")
+                    column_input = take_valid_input("Guess a column:\n ")
                     print("=======================")
 
                     player_guess = Guess(row=row_input,
