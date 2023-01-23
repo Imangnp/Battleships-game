@@ -84,6 +84,7 @@ class Board:
             return False
         return False
 
+
     # Returns true if there are no ships left on the board,
     # indicating the game is over.
     def is_game_finished(self) -> bool:
@@ -103,11 +104,10 @@ class Game:
         self.guesses = {OPPONENT_NAME: []}
 
 
-    def start(self) -> Bool:
-        # clear the console
-        os.system('clear')
+    def start(self):
+        # To restart the game
+        self.__reset()
         self.guesses[self.player_name] = []
-    
         player = Board(self.player_name)
         os.system('clear')
         computer = Board(OPPONENT_NAME)
@@ -125,8 +125,8 @@ class Game:
             if is_player_turn:
                 # Ask player to input Coordinates
                 while True:
-                    row_input = take_valid_input("Guess a row:\n ")
-                    column_input = take_valid_input("Guess a column:\n ")
+                    row_input = self.__take_valid_input("Guess a row:\n ")
+                    column_input = self.__take_valid_input("Guess a column:\n ")
                     print("============================")
 
                     player_guess = Guess(row=row_input,
@@ -144,8 +144,9 @@ class Game:
                                         guess=player_guess)
 
                         if has_player_won:
-                            print(f"Game over!\n\n{self.player_name} won the game!")
+                            print(f"\n\nGame over!\n\n{self.player_name} won the game!")
                             self.__show_score(first=player, second=computer)
+                            return self.__show_game_exit_menu()
                         break # Break from the input guess validation
 
                     else:
@@ -170,13 +171,9 @@ class Game:
                                         guess=computer_guess)
 
                     if has_computer_won:
-                        print(f"Game over!\n\n{OPPONENT_NAME} won the game!")
+                        print(f"\n\nGAME OVER!\n{OPPONENT_NAME} is the winner!")
                         self.__show_score(first=player, second=computer)
-                    # print(f"\n{player.name}'s Score: ",
-                    #       NUMBER_OF_SHIPS - computer.ship_counter)
-                    # print("Computer's Score: ",
-                    #       NUMBER_OF_SHIPS - player.ship_counter)
-                    # print("============================\n")
+                        return self.__show_game_exit_menu()
                     break
                 else:
                     continue
@@ -200,10 +197,25 @@ class Game:
                 print("Please enter a number between 0 and 4!")
 
     def __show_score(self, first: Board, second: Board):
-            # in each cycle, every player's score is equal to the number of the ships that the other player has lost
-            print(f"\n{first.name}'s Score: ", NUMBER_OF_SHIPS - second.ship_counter)
-            print(f"\n{second.name}'s Score: ", NUMBER_OF_SHIPS - first.ship_counter)
-            print("============================\n")
+        # in each cycle, every player's score is equal to the number of the ships that the other player has lost
+        print(f"\n{first.name}'s Score: ", NUMBER_OF_SHIPS - second.ship_counter)
+        print(f"{second.name}'s Score: ", NUMBER_OF_SHIPS - first.ship_counter)
+        print("============================\n")
+
+    # Give option to the player to exit or restart the game when the game is over
+    def __show_game_exit_menu(self):
+        while True:
+            play_again = input("Do you want to play again? (yes/y or no/n)\n")
+            if play_again.lower() in ["yes", "y"]:
+                return True
+            elif play_again.lower() in ["no", "n"]:
+                return False
+            else:
+                print("Invalid input. Please enter (yes/y or no/n)")
+                continue
+
+    def __reset(self):
+        self.guesses = {OPPONENT_NAME: []}
 
 # Welcome message for the game and information about the game's rules
 def display_welcome_msg():
@@ -213,25 +225,42 @@ def display_welcome_msg():
 █▄█ █▀█ ░█░ ░█░ █▄▄ ██▄ ▄█ █▀█ █ █▀▀ ▄█\n
         """
         )
-        # greeting
-        print("==========================================================")
-        print("Welcome to the Battleships game")
-        print(f"Board Size: {BOARD_SIZE}. Number of ships: {NUMBER_OF_SHIPS}")
-        print("Coordinates: Numbers betwen 0 and 4 for rows and columns")
-        print("How to play:")
-        print("""In this version of Battleship, the player competes against
+    # greeting
+    print("==========================================================")
+    print("Welcome to the Battleships game")
+    print(f"Board Size: {BOARD_SIZE}. Number of ships: {NUMBER_OF_SHIPS}")
+    print("Coordinates: Numbers betwen 0 and 4 for rows and columns")
+    print("How to play:")
+    print("""In this version of Battleship, the player competes against
 the computer. Each player has a game board with ships placed
 randomly. The player attempts to guess the coordinates of
 the computer's ships by inputting numbers between 0 and 4
 for the rows and columns.""")
-        print("==========================================================\n")   
+    print("==========================================================\n")   
 
+
+# Prompted player for a username and added validation to ensure input.
+def validate_user_name() -> str:
+    while True:
+        user_input = input("Please enter your username:\n")
+        if user_input:
+            return user_input
+        else:
+            print("User input can not be empty!")
+            continue
 
 
 def main():
+    # clear the console
+    os.system('clear')
     display_welcome_msg()
-    game = Game()
-    game.start()
+    # Ask the player for a username
+    player_name = validate_user_name()
+    game = Game(player_name)
+    while game.start():
+        continue
+
+    print(f"{player_name}, thanks for playing my wonderfull game!!!")
 
 
 if __name__ == "__main__":
