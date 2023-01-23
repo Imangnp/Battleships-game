@@ -30,7 +30,10 @@ class Guess:
         self.column = column
         self.striker = striker
 
-
+# This class creates two boards for player and computer with
+# randomly placed ships and empty spaces.
+# It checks if player's input are numbers and valid to been verify.
+# It also verifys if coordinates input by players hit a ship or is missed.
 class Board:
 
     def __init__(self, name: str):
@@ -86,14 +89,31 @@ class Board:
             return False
         return False
 
+    # Updates the scores based on whether players have hit a ship or missed.
+    def update_score(self, is_player, is_hit):
+        global player_score
+        global computer_score
+        if is_player:
+            if is_hit:
+                player_score += 1
+        else:
+            if is_hit:
+                computer_score += 1
 
+    # Returns true if there are no ships left on the board,
+    # indicating the game is over.
     def is_game_finished(self) -> bool:
         if self.ship_counter == 0:
             return True
         return False
 
+
+# This class runs the game by printing menu to the console and
+# letting the player to enter inputs such as username and coordinates.
+# It also prints the crated boards for player and computer.
 class Game:
 
+    # Stores the guesses made by the player and the computer.
     def __init__(self):
         self.guesses = {OPPONENT_NAME: []}
         
