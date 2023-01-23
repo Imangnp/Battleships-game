@@ -42,7 +42,7 @@ class Board:
     # Create the boards for player and opponent
     def print_grid(self, mask_ships=True):
         # Print boards with player and opponent lable
-        print(f"\n{self.name}'s battlefield:\n")
+        print(f"{self.name}'s battlefield:")
         print("    0  1  2  3  4")
         print("  +----------------+")
         for row in range(BOARD_SIZE):
@@ -129,8 +129,8 @@ class Game:
             if is_player_turn:
                 # Ask player to input Coordinates
                 while True:
-                    row_input = self.__take_valid_input("Guess a row:\n")
-                    column_input = self.__take_valid_input("Guess a column:\n")
+                    row_input = self.__take_valid_input("Guess a row: ")
+                    column_input = self.__take_valid_input("Guess a column: ")
                     print("============================")
 
                     player_guess = Guess(row=row_input,
