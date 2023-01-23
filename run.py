@@ -1,4 +1,5 @@
 import random
+import os
 
 # Global variable
 NUMBER_OF_SHIPS = 4
@@ -68,7 +69,9 @@ class Board:
             if self.grid[x][y] != '@':
                 self.grid[x][y] = '@'
                 self.ship_counter += 1
-    
+
+    # takes input and checks if it hits a ship, updates the grid,
+    # and returns a boolean indicating whether the game has ended.
     def add_guess_to_grid(self, guess: Guess) -> bool:
 
         # if the player's input hit a ship
@@ -116,12 +119,38 @@ class Game:
     # Stores the guesses made by the player and the computer.
     def __init__(self):
         self.guesses = {OPPONENT_NAME: []}
+
+    # Welcome message for the game and information about the game's rules
+    def display_welcome_msg(self):
+        print(
+            """
+█▄▄ ▄▀█ ▀█▀ ▀█▀ █░░ █▀▀ █▀ █░█ █ █▀█ █▀
+█▄█ █▀█ ░█░ ░█░ █▄▄ ██▄ ▄█ █▀█ █ █▀▀ ▄█\n
+        """
+        )
+        # greeting
+        print("==========================================================")
+        print("Welcome to the Battleships game")
+        print(f"Board Size: {BOARD_SIZE}. Number of ships: {NUMBER_OF_SHIPS}")
+        print("Coordinates: Numbers betwen 0 and 4 for rows and columns")
+        print("How to play:")
+        print("""In this version of Battleship, the player competes against
+the computer. Each player has a game board with ships placed
+randomly. The player attempts to guess the coordinates of
+the computer's ships by inputting numbers between 0 and 4
+for the rows and columns.""")
+        print("==========================================================\n")
         
     def start(self):
+        # clear the console
+        os.system('clear')
+        self.display_welcome_msg()
+
         # Ask the player for a username
         player_name = input("Please enter your username:\n")
         self.guesses[player_name] = []
         player = Board(player_name)
+        os.system('clear')
         computer = Board(OPPONENT_NAME)
         # Initializes player's board
         player.init_board()
@@ -184,11 +213,15 @@ class Game:
             computer.print_grid(True)
 
             if has_player_won:
-                print(f"Game over!\n{player_name} won the game!")
+                print(f"Game over!\n\n{player_name} won the game!")
                 exit(0)
             elif has_computer_won:
                 print(f"Game over!\n\n{OPPONENT_NAME} won the game!")
                 exit(0)
+
+        # Incrementing the score of the player and the computer
+        update_score(True, True)
+        
 
 def main():
     game = Game()
