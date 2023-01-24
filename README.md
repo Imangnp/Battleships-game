@@ -19,6 +19,8 @@ ___
     * [score](#score)  
     * [The End](#end) 
     * [Future Scope](#future-scope)   
+- [Data model](#data-model)
+    * [Description](#description)
 - [Testing](#testing)
     * [Validator Testing](#validator-testing)
 - [Deployment](#deployment)
@@ -48,36 +50,72 @@ ___
 
 # Features
   ## Start screen
-    ### Greeting
-    ### How to play
-    ### Input Username
-
-  ![Start screen]()
+  - A logo created by symbols 
+  - Welcome message and game information
+  - Explane how to play the game
+  - Prompt for the player's username.
+   
+  ![Start screen](./assets/images/Screenshot-start-screen.png)
 
   ## Game Boards
-    ### Computer's battlefield
-    ### Players's battlefield
-    ### Guess a row
-    ### Guess a column
+  ### Battlefields
+  - Player and Computer's battlefield boards
+  - Ships are randomly placed in both boards
+  - The ships on the computer board are hidden.
+  - Prompt for input of coordinates.
+    - Ask the player to guess a row
+    - ask the player to guess a column
 
-  ![Boards]()
+  ![Boards](./assets/images/Screenshot-game-boards.png)
 
   ## score
-    ### Players score
+  - whether the player or computer hit or missed a ship
+  - Display their scores.
+  - Create new boards, with the choices made by the player or computer displayed on them.
 
-  ![Scores]()
+  ![Scores](./assets/images/Screenshot-game-scores.png)
+
+  ## Input validation
+  - player should choose a number only between 0 and 4!
+
+  ![Scores](./assets/images/Screenshot-invalid-input.png)
+
+  - Player cannot guess a coordinate twice
+  
+  ![Scores](./assets/images/Screenshot-taken-guess.png)
 
   ## The End
-    ### The winner
-    ### Input if to restart
+  - Announce the winner of the game.
+  - Display the final scores
+  - Ask the player if they want to play again.
+    - yes - restart the game
+    - no - thanking them for playing the game.
 
-  ![The End]()
+  ![The End](./assets/images/Screenshot-end-game.png)
 
   ## Future Scope
-    ### Choose the board size
-    ### Choose the number of ships
-    ### Choose the player number
+  In future updates of the game, players will have the option to select the size of the board, the number of ships and how to place them on the board. Additionally, the game will support multiple players.
 
+# Data model
+## Description
+The code defines global variables "NUMBER_OF_SHIPS" and "BOARD_SIZE" that are used to set the number of ships on the board and the size of the board respectively.
+
+The code consists of three main classes: Guess, Board, and Game: 
+
+1- The Guess class is used to hold information about a player's guess. Each guess consists of a row, column, and striker (the player or computer). 
+- It has a `--eq--()` method that compares two Guess objects.
+
+2- Board class is used to create two boards for the player and the computer with randomly placed ships and empty spaces.  It has several methods:
+- `print_grid()` method that prints the board.
+- `init_board()` method that randomly creates coordinates for NUMBER_OF_SHIPS on the board.
+- `add_guess_to_grid()` method that takes a guess object as input, checks if it hits a ship, updates the grid, and returns a boolean indicating whether the game has ended.
+- `is_game_finished()` method that returns true if there are no ships left on the board, indicating the game is over. 
+
+3- The Game class is used to control the flow of the game. It has a guesses attribute that is a dictionary where the keys are the players name and the value is a list of Guess objects.  It has several methods:
+- `start()` method that initializes the game board, ask player for guesses until the game is over, generate random guesses for computer, update the game boards and when the ships of whether player are over annunce the game winner.
+- `__show_score()` that shows updated score of the player or the computer based on whether they have hit a ship or missed. 
+- `__take_valid_input()` that verify if the player's input is a valid number between 0 and BOARD_SIZE-1 respectively.
+- `__show_game_exit_menu()` and  "__reset()" to ask player if they want to play again and regenerate the game again.
 
 # Testing
   ## Validator Testing
