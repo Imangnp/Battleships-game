@@ -23,6 +23,7 @@ ___
     * [Description](#description)
 - [Testing](#testing)
     * [Validator Testing](#validator-testing)
+    * [Manual Testing](#manual-testing)
 - [Deployment](#deployment)
 - [Technologies](#technologies) 
 - [Bugs](#bugs)
@@ -119,10 +120,27 @@ The code consists of three main classes: Guess, Board, and Game:
 
 # Testing
   ## Validator Testing
-  I have manually testing the project by dooing the following:
-
+[PEP8CI](https://pep8ci.herokuapp.com/) has been used to automatically check and ensure that Python code adheres to the recommended style guidelines.
 
   ![Validator](./assets/images/Screenshot-validator.png)
+
+  ## Manual Tasting
+
+| Test Case | Input | Expected result | Outcome |
+|-----------|-------|-----------------|---------|
+|Please enter your username:|"Player1"|Valid input|Pass|
+|Please enter your username:|"777"|Valid input|Pass|
+|Please enter your username:|" ", empty|User input can not be empty!<br>Please enter your username:|Pass|
+|Guess a row:<br> Guess a column:|"0", "1", "2", "3", "4"|Valid input|Pass|
+|Guess a row:<br> Guess a column:|"5", "9"|Please enter a number between 0 and 4!|Pass|
+|Guess a row:<br> Guess a column:|" ", empty|Please enter a number between 0 and 4!|Pass|
+|Guess a row:<br> Guess a column:|"word","A", "w"|Please enter a number between 0 and 4!|Pass|
+|Do you want to play again?|"yes", "y"|Valid input,|Pass|
+|Do you want to play again?|"no", "n"|Valid input|Pass|
+|Do you want to play again?|" ", empty|Invalid input. Please enter (yes/y or no/n)|Pass|
+|Do you want to play again?|"0", "1", "22", "50"|Invalid input. Please enter (yes/y or no/n)|Pass|
+|Do you want to play again?|"word","A", "w"|Invalid input. Please enter (yes/y or no/n)|Pass|
+|Do you want to play again?|"@", "/", "*"|Invalid input. Please enter (yes/y or no/n)|Pass|
 
 # Deployment
 The site has been deployed on Heroku by following these steps:
@@ -155,8 +173,8 @@ The site has been deployed on Heroku by following these steps:
   - Heroku
 
 # Bugs
-### - Problem:
- Some of the computer's guesses were not displayed on the board after the selection of coordinates section.
+### Problem:
+Some of the computer's guesses were not displayed on the board after the selection of coordinates section.
 
 ### Solution:
 I fixed it by one line code:

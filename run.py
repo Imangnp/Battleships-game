@@ -5,8 +5,6 @@ import os
 NUMBER_OF_SHIPS = 4
 BOARD_SIZE = 5
 OPPONENT_NAME = "Computer"
-player_score = 0
-computer_score = 0
 
 
 # Holds information about players guess in rows and columns and player's name
@@ -60,10 +58,10 @@ class Board:
     # Randomly creating coordinates for ships
     def init_board(self):
         while self.ship_counter < NUMBER_OF_SHIPS:
-            x = random.randint(0, BOARD_SIZE-1)
-            y = random.randint(0, BOARD_SIZE-1)
-            if self.grid[x][y] != '@':
-                self.grid[x][y] = '@'
+            x_index = random.randint(0, BOARD_SIZE-1)
+            y_index = random.randint(0, BOARD_SIZE-1)
+            if self.grid[x_index][y_index] != '@':
+                self.grid[x_index][y_index] = '@'
                 self.ship_counter += 1
 
     # Takes input and checks if it hits a ship, updates the grid,
@@ -148,7 +146,7 @@ class Game:
                                         guess=player_guess)
 
                         if has_player_won:
-                            print(f"\n\nGame over!")
+                            print("\n\nGame over!")
                             print(f"{self.player_name} is the winner!")
                             self.__show_score(first=player, second=computer)
                             return self.__show_game_exit_menu()
@@ -158,10 +156,10 @@ class Game:
                         print("Guess already taken, please guess again!")
                         continue
 
-            '''
+            """
             Computer generates random coordinates for its guesses
             by calling random.randint() method twice.
-            '''
+            """
             while True:
                 row_input = random.randint(0, BOARD_SIZE - 1)
                 column_input = random.randint(0, BOARD_SIZE - 1)
@@ -178,8 +176,8 @@ class Game:
                                         guess=computer_guess)
 
                     if has_computer_won:
-                        print(f"\n\nGAME OVER!")
-                        print(f"{self.OPPONENT_NAME} is the winner!")
+                        print("\n\nGAME OVER!")
+                        print(f"{OPPONENT_NAME} is the winner!")
                         self.__show_score(first=player, second=computer)
                         return self.__show_game_exit_menu()
                     break
