@@ -119,16 +119,57 @@ The code consists of three main classes: Guess, Board, and Game:
 
 # Testing
   ## Validator Testing
+  I have manually testing the project by dooing the following:
+
 
   ![Validator](./assets/images/Screenshot-validator.png)
 
 # Deployment
+The site has been deployed on Heroku by following these steps:
+1. Push most up-to-date code to Github
+2. Create a list of requirements by typing the following into the terminal: pip3 freeze > requirements.txt and then push the requirements to Github
+3. Login to Heroku
+4. From the dashboard click the “Create new app” button
+5. Name the app. The name has to be unique
+6. Select your region  
+7. Click “Create App”
+8. A page with all the information to set up the app will open, click on the “Setting” tab on the top
+9. Scroll down to the section “Config Vars”
+10. Create a "Config VAR" with the key of 'PORT' and value of '8000'
+11. Add buildpacks to our application by clicking “Add build pack”
+12. Select “Python” as a first build pack, and click “Save changes”.
+13. Add another build pack, called “Node.js”  and Click save
+14. Make sure the build pack are in order (python on the top, node.js on the bottom)
+15. Go to the top of the page and select the tab “Deploy”
+16. In the section 'Deployment method', select 'Github', after that  you click on the button “Connect to Github”
+17. Enter the repository in Github to connect to and click 'Search'
+18. Once you find the repository, Click “connect” to link the app to Github repository
+19. Scroll down to  'Automatic deploys', select the 'Enable Automatic Deploy' option
+20. Go to Manual Deploy and click on “Deploy Branch”
+21. Wait for the app to build and then click on the "View" link.
 
 # Technologies
+- Languages: 
+  - Python
+- Platform: 
+  - Heroku
 
 # Bugs
+### - Problem:
+ Some of the computer's guesses were not displayed on the board after the selection of coordinates section.
+
+### Solution:
+I fixed it by one line code:
+
+![Bug](./assets/images/append-guess-bug.png)
 
 # Credits
+- [Fsymbols](https://fsymbols.com/generators/) provides a variety of different symbol generators, including text symbols that has been used to create a temporary logo for the game.
+
+![logo](./assets/images/Screenshot-logo.png)
+
+- [stackoverflow](https://stackoverflow.com/questions/) helped me to learned a lot about methods and loops in Python. I also discovered how to clear the interpreter console using `os.system()` and about the `__eq__` method  which was particularly useful for this project.
+
 
 [Back to Top](#)
 

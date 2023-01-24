@@ -179,7 +179,7 @@ class Game:
 
                     if has_computer_won:
                         print(f"\n\nGAME OVER!")
-                        print(f"{self.player_name} is the winner!")
+                        print(f"{self.OPPONENT_NAME} is the winner!")
                         self.__show_score(first=player, second=computer)
                         return self.__show_game_exit_menu()
                     break
