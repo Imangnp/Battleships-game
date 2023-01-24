@@ -233,9 +233,9 @@ class Game:
 # Welcome message for the game and information about the game's rules
 def display_welcome_msg():
     print(
-            """\n
+            """
 █▄▄ ▄▀█ ▀█▀ ▀█▀ █░░ █▀▀ █▀ █░█ █ █▀█ █▀
-█▄█ █▀█ ░█░ ░█░ █▄▄ ██▄ ▄█ █▀█ █ █▀▀ ▄█\n
+█▄█ █▀█ ░█░ ░█░ █▄▄ ██▄ ▄█ █▀█ █ █▀▀ ▄█
         """
         )
     # greeting
