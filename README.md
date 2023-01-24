@@ -116,7 +116,7 @@ The code consists of three main classes: Guess, Board, and Game:
 - `start()` method that initializes the game board, ask player for guesses until the game is over, generate random guesses for computer, update the game boards and when the ships of whether player are over annunce the game winner.
 - `__show_score()` that shows updated score of the player or the computer based on whether they have hit a ship or missed. 
 - `__take_valid_input()` that verify if the player's input is a valid number between 0 and BOARD_SIZE-1 respectively.
-- `__show_game_exit_menu()` and  "__reset()" to ask player if they want to play again and regenerate the game again.
+- `__show_game_exit_menu()` and  `__reset()` to ask player if they want to play again and regenerate the game again.
 
 # Testing
   ## Validator Testing
@@ -130,17 +130,18 @@ The code consists of three main classes: Guess, Board, and Game:
 |-----------|:-------:|-----------------|:--------:|
 |Please enter your username:|"Player1"|Valid input|Pass|
 |Please enter your username:|"777"|Valid input|Pass|
-|Please enter your username:|" ", empty|User input can not be empty!<br>Please enter your username:|Pass|
+|Please enter your username:|empty|User input can not be empty!<br>Please enter your username:|Pass|
 |Guess a row:<br> Guess a column:|"0", "1", "2", "3", "4"|Valid input|Pass|
-|Guess a row:<br> Guess a column:|"5", "9"|Please enter a number between 0 and 4!|Pass|
-|Guess a row:<br> Guess a column:|" ", empty|Please enter a number between 0 and 4!|Pass|
-|Guess a row:<br> Guess a column:|"word","A", "w"|Please enter a number between 0 and 4!|Pass|
-|Do you want to play again?|"yes", "y"|Valid input,|Pass|
+|Guess a row:<br> Guess a column:|"5", "12"|Please enter a number between 0 and 4!|Pass|
+|Guess a row:<br> Guess a column:|empty|Please enter a number between 0 and 4!|Pass|
+|Guess a row:<br> Guess a column:|"word", "A", "w"|Please enter a number between 0 and 4!|Pass|
+|Guess a row:<br> Guess a column:|"?", "-", "#"|Please enter a number between 0 and 4!|Pass|
+|Do you want to play again?|"yes", "y"|Valid input|Pass|
 |Do you want to play again?|"no", "n"|Valid input|Pass|
-|Do you want to play again?|" ", empty|Invalid input. Please enter (yes/y or no/n)|Pass|
+|Do you want to play again?|empty|Invalid input. Please enter (yes/y or no/n)|Pass|
 |Do you want to play again?|"0", "1", "22", "50"|Invalid input. Please enter (yes/y or no/n)|Pass|
 |Do you want to play again?|"word", "A", "w"|Invalid input. Please enter (yes/y or no/n)|Pass|
-|Do you want to play again?|"@", "/", "*"|Invalid input. Please enter (yes/y or no/n)|Pass|
+|Do you want to play again?|"@", "/", "_"|Invalid input. Please enter (yes/y or no/n)|Pass|
 
 # Deployment
 The site has been deployed on Heroku by following these steps:
@@ -160,7 +161,7 @@ The site has been deployed on Heroku by following these steps:
 14. Make sure the build pack are in order (python on the top, node.js on the bottom)
 15. Go to the top of the page and select the tab “Deploy”
 16. In the section 'Deployment method', select 'Github', after that  you click on the button “Connect to Github”
-17. Enter the repository in Github to connect to and click 'Search'
+17. Enter the repository in Github to connect to and click "Search"
 18. Once you find the repository, Click “connect” to link the app to Github repository
 19. Scroll down to  'Automatic deploys', select the 'Enable Automatic Deploy' option
 20. Go to Manual Deploy and click on “Deploy Branch”

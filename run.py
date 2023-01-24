@@ -174,7 +174,7 @@ class Game:
                     # Add the guess to the list of guesses for computer
                     self.guesses.get(OPPONENT_NAME).append(computer_guess)
                     is_player_turn = True
-                    
+
                     # Verify if guess hit a ship by adding guess to the grid
                     has_computer_won = player.add_guess_to_grid(
                                         guess=computer_guess)
