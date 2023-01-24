@@ -40,7 +40,7 @@ class Board:
     # Create the boards for player and opponent
     def print_grid(self, mask_ships=True):
         # Print boards with player and opponent lable
-        print(f"{self.name}'s battlefield:")
+        print(f"\n{self.name}'s battlefield:")
         print("    0  1  2  3  4")
         print("  +----------------+")
         for row in range(BOARD_SIZE):
@@ -53,7 +53,7 @@ class Board:
                 else:
                     print(current_value, end="  ")
             print("| ")
-        print("  +----------------+\n")
+        print("  +----------------+")
 
     # Randomly creating coordinates for ships
     def init_board(self):
@@ -146,6 +146,8 @@ class Game:
                                         guess=player_guess)
 
                         if has_player_won:
+                            player.print_grid(False)
+                            computer.print_grid(False)
                             print("\n\nGame over!")
                             print(f"{self.player_name} is the winner!")
                             self.__show_score(first=player, second=computer)
@@ -168,14 +170,18 @@ class Game:
                                        striker=OPPONENT_NAME)
                 # Verify if the guess is valid
                 if computer_guess not in self.guesses.get(OPPONENT_NAME):
+
                     # Add the guess to the list of guesses for computer
                     self.guesses.get(OPPONENT_NAME).append(computer_guess)
                     is_player_turn = True
+                    
                     # Verify if guess hit a ship by adding guess to the grid
                     has_computer_won = player.add_guess_to_grid(
                                         guess=computer_guess)
 
                     if has_computer_won:
+                        player.print_grid(False)
+                        computer.print_grid(False)
                         print("\n\nGAME OVER!")
                         print(f"{OPPONENT_NAME} is the winner!")
                         self.__show_score(first=player, second=computer)

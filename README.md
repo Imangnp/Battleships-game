@@ -13,11 +13,11 @@ ___
 - [Overview](#Overview)
     * [Project](#Project) 
     * [How to play](#how-to-play)
- - [Features](#features) 
+ - [Structure](#structure) 
     * [Start screen](#start-screen) 
-    * [Game Boards](#game-boards)
-    * [score](#score)  
-    * [The End](#end) 
+    * [Game Board](#game-board)
+    * [Score](#score)  
+    * [End of the Game](#end) 
     * [Future Scope](#future-scope)   
 - [Data model](#data-model)
     * [Description](#description)
@@ -49,7 +49,7 @@ ___
   In this version the player competes against the computer. Each player has a game board with ships placed randomly. The player attempts to guess the coordinates of the computer’s ships by inputting numbers between 0 and 4 for rows and columns.
 
 
-# Features
+# Structure
   ## Start screen
   - A logo created by symbols 
   - Welcome message and game information
@@ -58,7 +58,7 @@ ___
    
   ![Start screen](./assets/images/Screenshot-start-screen.png)
 
-  ## Game Boards
+  ## Game Board
   ### Battlefields
   - Player and Computer's battlefield boards
   - Ships are randomly placed in both boards
@@ -69,7 +69,7 @@ ___
 
   ![Boards](./assets/images/Screenshot-game-boards.png)
 
-  ## score
+  ## Score
   - whether the player or computer hit or missed a ship
   - Display their scores.
   - Create new boards, with the choices made by the player or computer displayed on them.
@@ -85,7 +85,7 @@ ___
   
   ![Scores](./assets/images/Screenshot-taken-guess.png)
 
-  ## The End
+  ## End of the Game
   - Announce the winner of the game.
   - Display the final scores
   - Ask the player if they want to play again.
@@ -99,7 +99,7 @@ ___
 
 # Data model
 ## Description
-The code defines global variables "NUMBER_OF_SHIPS" and "BOARD_SIZE" that are used to set the number of ships on the board and the size of the board respectively.
+The code defines global variables `NUMBER_OF_SHIPS` and `BOARD_SIZE` that are used to set the number of ships on the board and the size of the board respectively.
 
 The code consists of three main classes: Guess, Board, and Game: 
 
@@ -124,10 +124,10 @@ The code consists of three main classes: Guess, Board, and Game:
 
   ![Validator](./assets/images/Screenshot-validator.png)
 
-  ## Manual Tasting
+  ## Manual Testing
 
 | Test Case | Input | Expected result | Outcome |
-|-----------|-------|-----------------|---------|
+|-----------|:-------:|-----------------|:--------:|
 |Please enter your username:|"Player1"|Valid input|Pass|
 |Please enter your username:|"777"|Valid input|Pass|
 |Please enter your username:|" ", empty|User input can not be empty!<br>Please enter your username:|Pass|
@@ -139,7 +139,7 @@ The code consists of three main classes: Guess, Board, and Game:
 |Do you want to play again?|"no", "n"|Valid input|Pass|
 |Do you want to play again?|" ", empty|Invalid input. Please enter (yes/y or no/n)|Pass|
 |Do you want to play again?|"0", "1", "22", "50"|Invalid input. Please enter (yes/y or no/n)|Pass|
-|Do you want to play again?|"word","A", "w"|Invalid input. Please enter (yes/y or no/n)|Pass|
+|Do you want to play again?|"word", "A", "w"|Invalid input. Please enter (yes/y or no/n)|Pass|
 |Do you want to play again?|"@", "/", "*"|Invalid input. Please enter (yes/y or no/n)|Pass|
 
 # Deployment
@@ -187,6 +187,8 @@ I fixed it by one line code:
 ![logo](./assets/images/Screenshot-logo.png)
 
 - [stackoverflow](https://stackoverflow.com/questions/) helped me to learned a lot about methods and loops in Python. I also discovered how to clear the interpreter console using `os.system()` and about the `__eq__` method  which was particularly useful for this project.
+
+![logo](./assets/images/--eq--.png)
 
 
 [Back to Top](#)
